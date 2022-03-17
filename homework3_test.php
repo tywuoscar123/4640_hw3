@@ -15,10 +15,17 @@
 
 <h2>Problem 1</h2>
 <?php
-    echo "Write tests for Problem 1 here\n";
-    $test1 = [ [ "score" => 55, "max_points" => 100 ], [ "score" => 55, "max_points" => 100 ] ];
-    echo calculateAverage($test1, false); // should be 55
-    //...
+  echo "Write tests for Problem 1 here<br>";
+  $test1 = [ [ "score" => 55, "max_points" => 100 ], [ "score" => 55, "max_points" => 100 ] ];
+  echo calculateGrade($test1, false); // should be 55
+  echo "<br>Run gridCorners()<br>";
+  $gridResult = gridCorners(3,4);
+  for($i = 0; $i < count($gridResult); $i += 1){
+    echo $gridResult[$i];
+    echo ", ";
+  }
+  echo "<br>"
+   
 ?>
 
 <p>...</p>
