@@ -22,7 +22,7 @@
   $gridResult = gridCorners(3,4);
   for($i = 0; $i < count($gridResult); $i += 1){
     echo $gridResult[$i];
-    echo ", ";
+    echo "    ";
   }
   echo "<br>"
    

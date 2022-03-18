@@ -36,49 +36,30 @@
     }
 
     function gridCorners($width, $height){
-        echo "<br> <br>";
         $result = array();
-        $colCount = 1;
-        $rowCount = 1;
-        for($i = 1; $i <= $width * $height; $i++){
-            echo "<br> CURRENT COL, ROW ";
-            echo $colCount;
-            echo " ";
-            echo $rowCount;
-            echo "<br> CURRENT i ";
-            echo $i;
-            echo "<br>";
-            //case for col 0 and n
-            if($i == 1 || ($i % $width) == 0){
-                echo "appendin";
-                $result[] = $i;
-                //when you complete 1 col, reset rowCount, colCount++
-                if(($i % $height) == 0){
-                    echo "<br> COMPLETED 1 COL RESET ROWCOUNT, COLCOUNT++ <br>";
-                    $rowCount = 1;
-                    $colCount++;
-                    continue;
-                }else{
-                    echo "<br> rowCount++ <br>";
-                    $rowCount++;
-                    continue;
-                }
-            //case for numbers in between
-            }else{
-                if($rowCount == 0 || $rowCount == $height)
-                $result[] = $i;
-                if(($i % $height) == 0){
-                    echo "<br> COMPLETED 1 COL RESET ROWCOUNT, COLCOUNT++ <br>";
-                    $rowCount = 1;
-                    $colCount++;
-                    continue;
-                }else{
-                    echo "<br> rowCount++ <br>";
-                    $rowCount++;
-                    continue;
-                }
-            }
-        }
+        //bottom left corner        
+        $result[] = 1;
+        $result[] = 2;
+        $result[] = 1 + $height;
+        //top left corner
+        $result[] = $height;
+        $result[] = $height - 1;
+        $result[] = $height * 2;
+        //top right corner
+        $result[] = $width * $height;
+        $result[] = $width * $height - 1;
+        $result[] = $width * $height - $height;
+        //bottom right corner
+        $result[] = $width * $height - ($height - 1);
+        $result[] = $width * $height - ($height - 1) - $height;
+        $result[] = $width * $height - ($height - 1) + 1;
+        sort($result);
+        $result = array_unique($result);
+        $result = array_values($result);
         return $result;
-        echo "<br>";
+    }
+
+    function combineShoppingLists($list1, $list2){
+        $list1Keys = array_keys($list1);
+        $list2Keys = array_keys($list2);
     }
