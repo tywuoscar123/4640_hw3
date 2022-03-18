@@ -59,7 +59,19 @@
         return $result;
     }
 
-    function combineShoppingLists($list1, $list2){
-        $list1Keys = array_keys($list1);
-        $list2Keys = array_keys($list2);
+    function combineShoppingLists(...$shoppingLists){
+        $combinedList = array();
+        //iterate through entered lists
+        foreach($shoppingLists as $shoppingList){
+            //check if item exists as key in combinedList, if not, add item as key and value pair
+            foreach($shoppingList["list"] as $item){
+                if(array_key_exists($item, $combinedList)){
+                    $combinedList[$item] = array_push($combinedList[$item], $shoppingList["user"]);
+                    continue;
+                }else{
+                    $combinedList[$item] = array($shoppingList["user"]);
+                }
+            }
+        }
+        return $combinedList;
     }
