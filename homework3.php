@@ -24,7 +24,7 @@
             $sumScored = $sumScored + $scores[$i]["score"];
             $sumAvail = $sumAvail + $scores[$i]["max_points"];
         }
-        if($drop){
+        if($drop && count($scores) > 1){
             $sumScored = $sumScored - $lowestScored;
             $sumAvail = $sumAvail - $lowestAvail;
             $average = round(100 * ($sumScored/$sumAvail), 3);
@@ -66,7 +66,7 @@
             //check if item exists as key in combinedList, if not, add item as key and value pair
             foreach($shoppingList["list"] as $item){
                 if(array_key_exists($item, $combinedList)){
-                    $combinedList[$item] = array_push($combinedList[$item], $shoppingList["user"]);
+                    array_push($combinedList[$item], $shoppingList["user"]);
                     continue;
                 }else{
                     $combinedList[$item] = array($shoppingList["user"]);
@@ -74,4 +74,17 @@
             }
         }
         return $combinedList;
+    }
+
+    function validateEmail($email, $regex = 0){
+        $defaultRegex = "/^[a-zA-z0-9-_+]?[a-zA-z0-9-_+.]*[a-zA-z0-9-_+]?@[a-zA-z0-9.-]*.[a-zA-z0-9.-]*$/";
+        if($regex == 0){
+            return preg_match($defaultRegex, $email) ? true : false;
+            }else{
+                if(preg_match($defaultRegex, $email) == 1 && preg_match($regex, $email)){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
     }
