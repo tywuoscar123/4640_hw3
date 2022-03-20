@@ -24,7 +24,9 @@
             $sumScored = $sumScored + $scores[$i]["score"];
             $sumAvail = $sumAvail + $scores[$i]["max_points"];
         }
-        if($drop && count($scores) > 1){
+        if($sumAvail == 0){
+            return 0;
+        }else if($drop && count($scores) > 1){
             $sumScored = $sumScored - $lowestScored;
             $sumAvail = $sumAvail - $lowestAvail;
             $average = round(100 * ($sumScored/$sumAvail), 3);
@@ -63,13 +65,16 @@
         $combinedList = array();
         //iterate through entered lists
         foreach($shoppingLists as $shoppingList){
-            //check if item exists as key in combinedList, if not, add item as key and value pair
-            foreach($shoppingList["list"] as $item){
-                if(array_key_exists($item, $combinedList)){
-                    array_push($combinedList[$item], $shoppingList["user"]);
-                    continue;
-                }else{
-                    $combinedList[$item] = array($shoppingList["user"]);
+            //check if list exists, if not, continue
+            if(array_key_exists("list", $shoppingList)){
+                //check if item exists as key in combinedList, if not, add item as key and value pair
+                foreach($shoppingList["list"] as $item){
+                    if(array_key_exists($item, $combinedList)){
+                        array_push($combinedList[$item], $shoppingList["user"]);
+                        continue;
+                    }else{
+                        $combinedList[$item] = array($shoppingList["user"]);
+                    }
                 }
             }
         }
